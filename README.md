@@ -1,10 +1,10 @@
 # PHP + Nginx proxy for keepalive connections
 
-This project demonstrates one of the possible configurations of Nginx sidecar proxy
+This project demonstrates one of the possible configurations of the Nginx sidecar proxy.
 for handling keepalive connections for PHP applications.
 
-That allows you to reduce execution time of your requests by avoiding unnecessary 
-duplicate TCP and TLS handshakes with remote API.
+That allows you to reduce the execution time of your requests by avoiding unnecessary
+duplicate TCP and TLS handshakes with a remote API.
 
 ## Example of results
 
@@ -62,8 +62,8 @@ Executed request #9: tcp = 0.001086, tls = 0, total = 0.32175
 Finished all requests in 4.4288210868835 seconds
 ========================
 ```
-PHP don't need to establish TLS connection with proxy, it uses simple HTTP. 
-In example with whentheycry.ru you can see that only first request took
+PHP doesn't need to establish a TLS connection with a proxy; it uses simple HTTP.
+In example, with whentheycry.ru, you can see that only the first request took
 quite time, the following requests reused connection
 
 ```
@@ -88,11 +88,11 @@ quite time, the following requests reused connection
 [20/Apr/2024:08:59:37 +0000] "GET /whentheycry.ru/api/post/2 HTTP/1.1" 65.21.251.49:443|keep-alive|0.000|0.306|0.312
 [20/Apr/2024:08:59:37 +0000] "GET /whentheycry.ru/api/post/2 HTTP/1.1" 65.21.251.49:443|keep-alive|0.000|0.316|0.320
 ```
-Three numbers - connect_time (tcp + tls), header_time, total_time. As you can see
-keepalive connections depend on configuration of remote service. For whentheycry.ru
-we have only 1 balancer, that's why single connection is enough.
+Three numbers: connect_time (tcp + tls), header_time, and total_time. As you can see,
+Keep-alive connections depend on the configuration of the remote service. For whentheycry.ru
+We have only one balancer; that's why a single connection is enough.
 
-## Run local
+## Run locally
 Run containers
 ```
 docker-compose up
